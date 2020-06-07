@@ -13,7 +13,7 @@
 window.jq = $.noConflict(true)
 
 const appTemplate = `
-<div id="huddle-target" style="opacity: 1" >
+<div v-if="isIframe" id="huddle-target">
   <iframe
     v-if="isIframe"
     :src="iframeUrl"
