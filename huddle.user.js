@@ -13,7 +13,7 @@
 window.jq = $.noConflict(true)
 
 const appTemplate = `
-<div v-if="isIframe" id="huddle-target">
+<div v-if="isIframe" id="huddle-target" :class="mode">
   <iframe
     v-if="isIframe"
     :src="iframeUrl"
@@ -35,6 +35,10 @@ const appStyle = `
 #huddle-target #huddle-iframe {
   width: 300px;
   height: 100vh;
+}
+
+#huddle-target .MODE-ZERO {
+  height: auto;
 }
 `
 
@@ -61,6 +65,13 @@ jq(document).ready(function () {
     computed: {
       isIframe() {
         return this.count > 0
+      },
+      mode() {
+        let mode = ''
+        if (this.count === 0) {
+          mode = 'MODE-ZERO'
+        }
+        return mode
       },
     },
     async mounted() {
