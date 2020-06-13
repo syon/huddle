@@ -77,7 +77,7 @@ jq(document).ready(function () {
     async mounted() {
       await this.getCount()
       const url = document.location.href
-      this.iframeUrl = `https://rd.lobine.app/?url=${url}`
+      this.iframeUrl = `https://rd.lobine.app/huddle?url=${url}`
     },
     methods: {
       async getCount() {
