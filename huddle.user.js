@@ -27,6 +27,17 @@ const appTemplate = `
 `
 
 const appStyle = `
+html {
+  transition: 1.2s;
+  padding-right: 0;
+  transition-property: padding-right;
+}
+
+html.huddling {
+  padding-right: 300px;
+  transition-property: padding-right;
+}
+
 #huddle-target {
   position: fixed;
   top: 0;
@@ -114,6 +125,7 @@ jq(document).ready(function () {
       },
       handleSwitch() {
         this.isActive = !this.isActive
+        jq('html').toggleClass('huddling')
       },
     },
   })
