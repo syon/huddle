@@ -13,7 +13,10 @@
 window.jq = $.noConflict(true)
 
 const appTemplate = `
-<div v-if="isIframe" id="huddle-target" :class="mode">
+<div v-if="isIframe" id="huddle-target" :class="rootClasses">
+  <a href="#" class="huddle-switch" @click.prevent="handleSwitch">
+    <div>{{ count }}</div>
+  </a>
   <iframe
     v-if="isIframe"
     :src="iframeUrl"
@@ -31,14 +34,32 @@ const appStyle = `
   width: 300px;
   height: 100vh;
   z-index: 1000000001;
+  transition: 0.2s;
+  transform: translate3d(300px, 0, 0);
 }
+
+#huddle-target.active {
+  transform: translate3d(0, 0, 0);
+}
+
 #huddle-target #huddle-iframe {
   width: 300px;
   height: 100vh;
+  border: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 #huddle-target .MODE-ZERO {
   height: auto;
+}
+
+#huddle-target .huddle-switch {
+  position: absolute;
+  left: -36px;
+  top: 33%;
+  font-size: 10px;
+  color: #FF4081;
+  cursor: pointer;
 }
 `
 
@@ -59,12 +80,16 @@ jq(document).ready(function () {
   const app = new Vue({
     el: '#huddle-target',
     data: {
-      count: 0,
+      count: '',
       iframeUrl: '',
+      isActive: false,
     },
     computed: {
       isIframe() {
         return this.count > 0
+      },
+      rootClasses() {
+        return [this.mode, this.isActive ? 'active' : '']
       },
       mode() {
         let mode = ''
@@ -75,15 +100,20 @@ jq(document).ready(function () {
       },
     },
     async mounted() {
-      await this.getCount()
-      const url = document.location.href
-      this.iframeUrl = `https://rd.lobine.app/huddle?url=${url}`
+      this.count = await this.getCount()
+      if (this.count > 0) {
+        const url = document.location.href
+        this.iframeUrl = `https://rd.lobine.app/huddle?url=${url}`
+      }
     },
     methods: {
       async getCount() {
         const url = document.location.href
         const res = await $axios.get(`bookmark/getEntryCount?url=${url}`)
-        this.count = res.data
+        return res.data
+      },
+      handleSwitch() {
+        this.isActive = !this.isActive
       },
     },
   })
