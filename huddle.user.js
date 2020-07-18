@@ -7,7 +7,7 @@
 // @require        https://code.jquery.com/jquery-3.5.1.min.js
 // @require        https://cdn.jsdelivr.net/npm/vue@2.6.11
 // @require        https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js
-// @version        0.0.3
+// @version        0.0.4
 // ==/UserScript==
 
 window.jq = $.noConflict(true)
