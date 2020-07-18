@@ -34,7 +34,7 @@ html {
 }
 
 html.huddling {
-  padding-right: 300px;
+  padding-right: 350px;
   transition-property: padding-right;
 }
 
@@ -42,11 +42,11 @@ html.huddling {
   position: fixed;
   top: 0;
   right: 0;
-  width: 300px;
+  width: 350px;
   height: 100vh;
   z-index: 1000000001;
   transition: 0.2s;
-  transform: translate3d(300px, 0, 0);
+  transform: translate3d(350px, 0, 0);
 }
 
 #huddle-target.active {
@@ -54,7 +54,7 @@ html.huddling {
 }
 
 #huddle-target #huddle-iframe {
-  width: 300px;
+  width: 350px;
   height: 100vh;
   border: 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
