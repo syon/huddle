@@ -84,7 +84,7 @@ jq(document).ready(function () {
   jq('head').append(`<style type="text/css">${appStyle}</style>`)
 
   const $axios = axios.create({
-    baseURL: 'https://hatena.now.sh/api/',
+    baseURL: 'https://hatena.vercel.app/api/',
     timeout: 30000,
   })
 
